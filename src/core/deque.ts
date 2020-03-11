@@ -35,15 +35,14 @@ export default class Deque extends Queue implements IDeque{
     if (this.isEmpty()) {
       return undefined
     }
-
+    this.count--;
     const item = this.items[this.count];
     delete this.items[this.count];
-    this.count--;
     return item
   }
 
   removeFront() {
-    super.dequeue();
+    return super.dequeue();
   }
 
   peekFront() {
@@ -51,6 +50,6 @@ export default class Deque extends Queue implements IDeque{
   }
 
   peekBack() {
-    return this.items[this.count]
+    return this.items[this.count-1]
   }
 }
