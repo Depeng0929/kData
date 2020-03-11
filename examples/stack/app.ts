@@ -1,4 +1,4 @@
-import { Stack } from "../../src/kdata";
+import { Index } from "../../src/kdata";
 
 
 // 栈通常临时存储数据,例如
@@ -6,7 +6,7 @@ import { Stack } from "../../src/kdata";
 // 进制转换
 
 function baseConverter(decNumber: number, base: number) {
-  const stack = new Stack();
+  const stack = new Index();
   const baseStrs = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let aNumber = decNumber;
   let rem;
