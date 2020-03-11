@@ -13,6 +13,7 @@ export interface IQueue {
   dequeue: () => any;
   peek: () => any;
   isEmpty: () => boolean;
+  clear: () => void;
 }
 
 export interface IDeque {

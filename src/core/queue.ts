@@ -43,4 +43,10 @@ export default class Queue implements IQueue{
     }
     return this.items[this.lowest]
   }
+
+  clear() {
+    this.items = {};
+    this.count = 0;
+    this.lowest = 0;
+  }
 }
