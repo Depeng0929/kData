@@ -38,6 +38,9 @@ export default class Queue implements IQueue{
   }
 
   peek() {
+    if (this.isEmpty()) {
+      return undefined
+    }
     return this.items[this.lowest]
   }
 }
