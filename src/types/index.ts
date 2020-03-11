@@ -1,27 +1,38 @@
 export interface IStack {
-  size: number;
-  push: (element: any) => void;
-  pop: (element: any) => any;
-  peek: (element: any) => any;
-  isEmpty: () => boolean;
-  clear: () => void;
+  size: number
+  push: (element: any) => void
+  pop: (element: any) => any
+  peek: (element: any) => any
+  isEmpty: () => boolean
+  clear: () => void
 }
 
 export interface IQueue {
-  size: number;
-  enqueue: (element: any) => void;
-  dequeue: () => any;
-  peek: () => any;
-  isEmpty: () => boolean;
-  clear: () => void;
+  size: number
+  enqueue: (element: any) => void
+  dequeue: () => any
+  peek: () => any
+  isEmpty: () => boolean
+  clear: () => void
 }
 
 export interface IDeque {
-  size: number;
-  addFront: (element: any) => void;
-  addBack:(element: any) => void;
-  removeFront: () => any;
-  removeBack: () => any;
-  peekFront: () => any;
-  peekBack: () => any;
+  size: number
+  addFront: (element: any) => void
+  addBack: (element: any) => void
+  removeFront: () => any
+  removeBack: () => any
+  peekFront: () => any
+  peekBack: () => any
+}
+
+export interface ILinkList {
+  size: number
+  push: (element: any) => void
+  insert: (element: any, position: number) => void
+  getElementAt: (index: number) => any
+  remove: (element: any) => any
+  indexOf: (element: any) => any
+  removeAt: (position: number) => any
+  isEmpty: () => boolean
 }
