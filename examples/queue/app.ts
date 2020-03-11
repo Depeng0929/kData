@@ -1,26 +1,27 @@
-import { Queue, Deque } from "../../src/kdata";
+import { Deque } from "../../src/kdata";
 
+// 回文检查
 
-const queue = new Queue()
- console.log(queue.isEmpty())
- queue.enqueue(1)
- queue.enqueue(2)
- queue.enqueue(3)
-queue.dequeue();
-queue.dequeue();
-queue.dequeue();
-console.log(queue)
-console.log(queue.isEmpty())
-console.log(`-------------------------`)
-const deque = new Deque()
-deque.enqueue(1)
-deque.enqueue(2)
-deque.enqueue(3)
-deque.enqueue(4)
-deque.addFront(0)
-deque.addFront(-1)
-deque.addBack(5)
-deque.removeBack()
-deque.removeFront()
-// deque.addBack(5)
-console.log(deque)
+function palindromeCheck(aString: string) {
+  if (!aString || aString.length <= 1) return false;
+
+  const deque = new Deque();
+  aString = aString.replace(/^\s*/g,'');
+
+  for (let i of aString) {
+    deque.addBack(i)
+  }
+  let isEqual = true;
+  while(deque.size > 1 && isEqual) {
+    const firstChar = deque.removeFront();
+    const lastChar = deque.removeBack();
+    console.log(firstChar, lastChar)
+    if(firstChar !== lastChar) {
+      isEqual = false
+    }
+  }
+
+  return isEqual;
+}
+
+console.log(palindromeCheck('dacad'));
