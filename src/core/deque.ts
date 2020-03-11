@@ -8,23 +8,22 @@ export default class Deque extends Queue implements IDeque{
 
   addFront(element: any) {
     if (this.isEmpty()) {
-      this.addBack(element)
+      this.addBack(element);
       return;
     }
 
     if (this.lowest === 0) {
-      let  i = this.count;
-      while(i > this.lowest) {
-        this.items[i] = this.items[i-1];
-        i--;
+      for (let i = this.count;i > 0; i--) {
+        this.items[i] = this.items[i - 1];
       }
-
       this.count++;
-      this.items[this.lowest] = element;
+      this.lowest = 0;
+      this.items[0] = element;
       return;
     }
-    this.count ++;
-    this.items[this.lowest - 1] = element
+
+    this.lowest--;
+    this.items[this.lowest] = element;
   }
 
   addBack(element: any) {
