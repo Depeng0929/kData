@@ -1,15 +1,13 @@
-import { IQueue } from '../../types'
-
-interface QueueElement {
-  [index: number]: any
+interface IQueueElement<T = any> {
+  [index: number]: T
 }
 
-export default class Index implements IQueue {
-  protected items: QueueElement
+export class Queue<T = unknown> {
+  protected items: IQueueElement<T>
   protected lowest: number
   protected count: number
   constructor() {
-    this.items = Object.create(null)
+    this.items = {}
     this.count = 0
     this.lowest = 0
   }
@@ -18,12 +16,12 @@ export default class Index implements IQueue {
     return this.count - this.lowest
   }
 
-  enqueue(element: any) {
+  public enqueue(element: T) {
     this.items[this.count] = element
     this.count++
   }
 
-  dequeue() {
+  public dequeue(): T | undefined {
     if (this.isEmpty()) {
       return undefined
     }
@@ -33,18 +31,18 @@ export default class Index implements IQueue {
     return item
   }
 
-  isEmpty() {
+  public isEmpty() {
     return this.lowest - this.count === 0
   }
 
-  peek() {
+  public peek(): T | undefined {
     if (this.isEmpty()) {
       return undefined
     }
     return this.items[this.lowest]
   }
 
-  clear() {
+  public clear() {
     this.items = {}
     this.count = 0
     this.lowest = 0

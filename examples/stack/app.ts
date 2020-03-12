@@ -1,4 +1,4 @@
-import { Index } from "../../src/kdata";
+import { Stack } from "../../src/kdata";
 
 
 // 栈通常临时存储数据,例如
@@ -6,13 +6,13 @@ import { Index } from "../../src/kdata";
 // 进制转换
 
 function baseConverter(decNumber: number, base: number) {
-  const stack = new Index();
   const baseStrs = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const stack = new Stack<number>();
   let aNumber = decNumber;
   let rem;
   let result = '';
 
-  if (base < 2 || base > 36) return '';
+  if (base < 2 || base > 36) { return ''; }
 
   while(aNumber > 0) {
     rem = Math.floor(aNumber %  base);
@@ -21,10 +21,10 @@ function baseConverter(decNumber: number, base: number) {
   }
 
   while(!stack.isEmpty()) {
-    result += baseStrs[stack.pop()]
+    result += baseStrs[stack.pop()!];
   }
 
-  return result
+  return result;
 }
 
 console.log(baseConverter(100345, 2));

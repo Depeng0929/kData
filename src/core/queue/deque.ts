@@ -1,12 +1,11 @@
-import Queue from './index'
-import { IDeque } from '../../types'
+import { Queue } from './index'
 
-export default class Deque extends Queue implements IDeque {
+export class Deque<T = any> extends Queue<T> {
   constructor() {
     super()
   }
 
-  addFront(element: any) {
+  public addFront(element: T) {
     if (this.isEmpty()) {
       this.addBack(element)
       return
@@ -26,12 +25,12 @@ export default class Deque extends Queue implements IDeque {
     this.items[this.lowest] = element
   }
 
-  addBack(element: any) {
+  public addBack(element: T) {
     this.items[this.count] = element
     this.count++
   }
 
-  removeBack() {
+  public removeBack(): T | undefined {
     if (this.isEmpty()) {
       return undefined
     }
@@ -41,15 +40,15 @@ export default class Deque extends Queue implements IDeque {
     return item
   }
 
-  removeFront() {
+  public removeFront(): T | undefined {
     return super.dequeue()
   }
 
-  peekFront() {
+  public peekFront(): T | undefined {
     return this.items[this.lowest]
   }
 
-  peekBack() {
+  public peekBack(): T | undefined {
     return this.items[this.count - 1]
   }
 }

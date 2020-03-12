@@ -1,8 +1,6 @@
-import { IStack } from '../../types'
-
 const items = new WeakMap()
 
-export default class Index implements IStack {
+export class Stack<T = unknown> {
   constructor() {
     items.set(this, [])
   }
@@ -11,24 +9,24 @@ export default class Index implements IStack {
     return items.get(this).length
   }
 
-  push(element: any) {
+  public push(element: T) {
     items.get(this).push(element)
   }
 
-  pop() {
+  public pop(): T | undefined {
     return items.get(this).pop()
   }
 
-  peek() {
+  public peek(): T | undefined {
     const arr = items.get(this)
     return arr[arr.length - 1]
   }
 
-  isEmpty() {
+  public isEmpty() {
     return this.size === 0
   }
 
-  clear() {
+  public clear() {
     items.set(this, [])
   }
 }
