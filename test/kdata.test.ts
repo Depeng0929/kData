@@ -1,14 +1,13 @@
-import DummyClass from "../src/kdata"
+import { Deque, Queue, Stack } from '../src/kdata'
 
-/**
- * Dummy test
- */
-describe("Dummy test", () => {
-  it("works if true is truthy", () => {
-    expect(true).toBeTruthy()
+describe('data structure is constructor', function() {
+  test('stack is Function', function() {
+    expect(typeof Stack).toBe('function')
   })
-
-  it("DummyClass is instantiable", () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
+  test('queue is Function', function() {
+    expect(typeof Queue).toBe('function')
+  })
+  test('deque is Function', function() {
+    expect(typeof Deque).toBe('function')
   })
 })
