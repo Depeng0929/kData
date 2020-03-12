@@ -46,7 +46,6 @@
     "no-for-in-array":true,// 不允许对Array使用for-in
     "no-invalid-template-strings":true,// 只允许在模板字符串中使用${
     "no-invalid-this":true,// 不允许在class之外使用this
-    "no-null-keyword":true,// 不允许使用null,使用undefined代替null，指代空指针对象
     "no-sparse-arrays":true,// 不允许array中有空元素
     "no-string-throw":true,// 不允许throw一个字符串
     "no-switch-case-fall-through":true,// 不允许case段落中在没有使用breack的情况下，在新启一段case逻辑
