@@ -1,4 +1,4 @@
-import { Deque, Queue, Stack } from '../src/kdata'
+import { Deque, Queue, Stack, LinkList } from '../src/kdata'
 
 describe('data structure is constructor', function() {
   test('stack is Function', function() {
@@ -9,5 +9,8 @@ describe('data structure is constructor', function() {
   })
   test('deque is Function', function() {
     expect(typeof Deque).toBe('function')
+  })
+  test('LinkList is Function', function() {
+    expect(typeof LinkList).toBe('function')
   })
 })
