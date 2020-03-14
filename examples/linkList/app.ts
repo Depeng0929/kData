@@ -1,11 +1,10 @@
-import {LinkList} from "../../src/kdata";
+import {DoublyLinkList} from "../../src/kdata";
 
-const linkList = new LinkList();
+const doublyLinkList = new DoublyLinkList();
+doublyLinkList.push(1);
+doublyLinkList.push(2);
+doublyLinkList.push(3);
 
-linkList.push({ val: 1});
-linkList.push({ val: 2});
-linkList.push({ val: 3});
+doublyLinkList.insert(4, 3);
 
-
-console.log(linkList.remvoeAt(1));
-console.log(linkList);
+console.log(doublyLinkList);
