@@ -39,10 +39,28 @@ describe('linkList is ok?', function() {
     expect(linkList.indexOf(4)).toBe(2);
   });
 
+  it('should insert first normal', function () {
+    linkList.insert(-1, 0);
+    expect(linkList.getHead()!.value).toBe(-1);
+    expect(linkList.size).toBe(4);
+  });
+
+  it('should insert last normal', function () {
+    linkList.insert(5, linkList.size);
+    expect(linkList.size).toBe(4);
+    expect(linkList.indexOf(5)).toBe(3);
+  })
+
   it('should remove element noraml', function() {
     linkList.remove(3);
     expect(linkList.size).toBe(2);
     expect(linkList.indexOf(3)).toBe(-1);
     expect(linkList.indexOf(2)).toBe(1);
+  });
+
+  it('should removeAt first noraml', function () {
+    const removeItem = linkList.removeAt(0);
+    expect(removeItem).toBe(1);
+    expect(linkList.getHead()!.value).toBe(2);
   });
 });
