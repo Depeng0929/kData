@@ -9,10 +9,6 @@ export class DoublyLinkList<T = any> extends LinkList<T>{
     this.tail = undefined;
   }
 
-  public push(element: T) {
-    super.push(element);
-  }
-
   public insert (element: any, index: number) {
     if (index > this.size || index < 0) {
       return;
