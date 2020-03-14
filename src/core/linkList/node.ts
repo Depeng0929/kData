@@ -1,8 +1,16 @@
 export class Node {
-  public value: any
-  public next: Node | undefined
+  public value: any;
+  public next: Node | undefined;
   constructor(value: any) {
-    this.value = value
-    this.next = undefined
+    this.value = value;
+    this.next = undefined;
+  }
+}
+
+export class DoublyNode extends Node{
+  public prev: DoublyNode | undefined;
+  constructor(element: any ) {
+    super(element);
+    this.prev = undefined;
   }
 }

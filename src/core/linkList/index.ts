@@ -1,122 +1,122 @@
-import { Node } from './node'
+import { Node } from './node';
 
 function equal(a: any, b: any) {
-  return a === b
+  return a === b;
 }
 
 export class LinkList<T = any> {
-  protected head: Node | undefined
-  protected count: number
+  protected head: Node | undefined;
+  protected count: number;
   get size() {
-    return this.count
+    return this.count;
   }
 
   constructor() {
-    this.head = undefined
-    this.count = 0
+    this.head = undefined;
+    this.count = 0;
   }
 
   public push(element: T) {
-    const node = new Node(element)
-    let current
+    const node = new Node(element);
+    let current;
     if (!this.head) {
-      this.head = node
+      this.head = node;
     } else {
-      current = this.head
+      current = this.head;
       while (current!.next) {
-        current = current!.next
+        current = current!.next;
       }
-      current!.next = node
+      current!.next = node;
     }
-    this.count++
+    this.count++;
   }
 
   public remvoeAt(index: number) {
     if (index > this.count || index < 0) {
-      return
+      return;
     }
 
-    let current = this.head
+    let current = this.head;
     if (index === 0) {
-      this.head = current!.next
+      this.head = current!.next;
     } else {
-      const prev = this.getElementAt(index - 1)
-      current = prev!.next
-      prev!.next = current!.next
+      const prev = this.getElementAt(index - 1);
+      current = prev!.next;
+      prev!.next = current!.next;
     }
-    this.count--
+    this.count--;
 
-    return current!.value
+    return current!.value;
   }
 
   public getElementAt(index: number) {
     if (index > this.count || index < 0) {
-      return
+      return;
     }
 
-    let node = this.head
+    let node = this.head;
     for (let i = 0; i < index; i++) {
-      node = node?.next!
+      node = node?.next!;
     }
 
-    return node
+    return node;
   }
 
   public insert(element: T, index: number) {
     if (index > this.count || index < 0) {
-      return
+      return;
     }
 
-    const node = new Node(element)
-    let current
+    const node = new Node(element);
+    let current;
     if (index === 0) {
-      current = this.head
-      node.next = current
-      this.head = node
+      current = this.head;
+      node.next = current;
+      this.head = node;
     } else {
-      const prev = this.getElementAt(index - 1)
-      current = prev!.next
-      prev!.next = node
-      node.next = current
+      const prev = this.getElementAt(index - 1);
+      current = prev!.next;
+      prev!.next = node;
+      node.next = current;
     }
 
-    this.count++
+    this.count++;
   }
 
   public indexOf(element: T) {
-    let current = this.head
+    let current = this.head;
     for (let i = 0; i < this.count && current; i++) {
       if (this._isEqual(element, current.value)) {
-        return i
+        return i;
       }
-      current = current!.next
+      current = current!.next;
     }
-    return -1
+    return -1;
   }
 
   public remove(element: T) {
-    const index = this.indexOf(element)
-    return this.remvoeAt(index)
+    const index = this.indexOf(element);
+    return this.remvoeAt(index);
   }
 
   public isEmpty() {
-    return this.count === 0
+    return this.count === 0;
   }
 
   public getHead() {
-    return this.head
+    return this.head;
   }
 
   public clear() {
-    this.count = 0
-    this.head = undefined
+    this.count = 0;
+    this.head = undefined;
   }
 
   private _isEqual(a: T, b: T) {
     if (typeof a === 'object') {
-      return Object.is(a, b)
+      return Object.is(a, b);
     } else {
-      return a === b
+      return a === b;
     }
   }
 }
