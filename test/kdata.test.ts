@@ -1,16 +1,22 @@
-import { Deque, Queue, Stack, LinkList } from '../src/kdata';
+import { Deque, Queue, Stack, LinkList, DoublyLinkList, CircularLinkList } from '../src/kdata'
 
 describe('data structure is constructor', function() {
   test('stack is Function', function() {
-    expect(typeof Stack).toBe('function');
-  });
+    expect(typeof Stack).toBe('function')
+  })
   test('queue is Function', function() {
-    expect(typeof Queue).toBe('function');
-  });
+    expect(typeof Queue).toBe('function')
+  })
   test('deque is Function', function() {
-    expect(typeof Deque).toBe('function');
-  });
+    expect(typeof Deque).toBe('function')
+  })
   test('LinkList is Function', function() {
-    expect(typeof LinkList).toBe('function');
-  });
-});
+    expect(typeof LinkList).toBe('function')
+  })
+  test('DoublyLinkList is Function', function() {
+    expect(typeof DoublyLinkList).toBe('function')
+  })
+  test('CircularLinkList is Function', function() {
+    expect(typeof CircularLinkList).toBe('function')
+  })
+})
