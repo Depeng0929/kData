@@ -29,7 +29,6 @@
       }
     ],
     "no-empty-interface":true,// 不允许空接口
-    "prefer-for-of":true,// 如果for循环中没有使用索引，建议是使用for-of
     "semicolon": true,
     // 功能特性
     "await-promise":true,// 不允许没有Promise的情况下使用await

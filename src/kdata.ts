@@ -5,5 +5,6 @@ import { LinkList } from './core/linkList';
 import { DoublyLinkList } from './core/linkList/doublyLinkList';
 import { CircularLinkList } from './core/linkList/circularLinkList';
 import {KSet} from "./core/set";
+import {Dictionary} from "./core/dictionary";
 
-export { Stack, Queue, Deque, LinkList, DoublyLinkList, CircularLinkList, KSet };
+export { Stack, Queue, Deque, LinkList, DoublyLinkList, CircularLinkList, KSet, Dictionary };
