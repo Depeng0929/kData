@@ -1,4 +1,4 @@
-import {defaultTOString} from "../../utils";
+import {defaultTOString, isFalse} from "../../utils";
 import {VlauePair} from "./vlauePair";
 
 interface IDictionary {
@@ -29,7 +29,7 @@ export class Dictionary<T = any> {
 
 
   public set(key: unknown, value: T) {
-    if (key !== null && value !== null) {
+    if (!isFalse(key) && !isFalse(value)) {
       const tableKey = this.toStrFn(key);
       this.tables[tableKey] = new VlauePair(key, value);
     }
@@ -37,11 +37,11 @@ export class Dictionary<T = any> {
 
   public get(key: unknown) {
     const valuePair = this.tables[this.toStrFn(key)];
-    return valuePair === null ? undefined : valuePair.value;
+    return isFalse(valuePair) ? undefined : valuePair.value;
   }
 
   public hasKey(key: unknown) {
-    return this.tables[this.toStrFn(key)] !== null;
+    return !isFalse(this.tables[this.toStrFn(key)]);
   }
 
   public remove(key: unknown) {
