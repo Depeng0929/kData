@@ -5,7 +5,7 @@ function equal(a: any, b: any) {
 }
 
 export class LinkList<T = any> {
-  protected head: Node | undefined;
+  protected head: Node<T> | undefined;
   protected count: number;
   get size() {
     return this.count;
@@ -56,7 +56,7 @@ export class LinkList<T = any> {
       return;
     }
 
-    const node = new Node(element);
+    const node = new Node<T>(element);
     let current;
     if (index === 0) {
       current = this.head;
