@@ -6,6 +6,18 @@ import { DoublyLinkList } from './core/linkList/doublyLinkList';
 import { CircularLinkList } from './core/linkList/circularLinkList';
 import {KSet} from "./core/set";
 import {Dictionary} from "./core/dictionary";
-import { HashMap } from './core/dictionary/hashMap'
+import { HashMap } from './core/dictionary/hashMap';
+import { BinarySearchTree } from "./core/tree/binarySearchTree";
 
-export { Stack, Queue, Deque, LinkList, DoublyLinkList, CircularLinkList, KSet, Dictionary, HashMap };
+export {
+  Stack,
+  Queue,
+  Deque,
+  LinkList,
+  DoublyLinkList,
+  CircularLinkList,
+  KSet,
+  Dictionary,
+  HashMap,
+  BinarySearchTree
+};

@@ -1,4 +1,13 @@
-import { Deque, Queue, Stack, LinkList, DoublyLinkList, CircularLinkList, KSet } from '../src/kdata';
+import {
+  Deque,
+  Queue,
+  Stack,
+  LinkList,
+  DoublyLinkList,
+  CircularLinkList,
+  KSet,
+  BinarySearchTree
+} from '../src/kdata';
 
 describe('data structure is constructor', function() {
   test('stack is Function', function() {
@@ -21,5 +30,8 @@ describe('data structure is constructor', function() {
   });
   test('KSet is Function', function() {
     expect(typeof KSet).toBe('function');
+  });
+  test('BinarySearchTree is Function', function() {
+    expect(typeof BinarySearchTree).toBe('function');
   });
 });
