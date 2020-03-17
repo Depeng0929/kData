@@ -47,6 +47,10 @@ export class BinarySearchTree<T = any> {
     this.removeNode(this.root, val);
   }
 
+  public clear() {
+    this.root = Object.create(null);
+  }
+
   private removeNode(node: Node | null, val: unknown): Node | null {
     // 边界
     if (isFalse(node) || isFalse(val)) {
