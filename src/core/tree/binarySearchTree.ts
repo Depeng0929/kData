@@ -12,11 +12,11 @@ export class BinarySearchTree<T = any> {
   }
 
   get min() {
-    return this.minNode(this.root);
+    return this.minNode(this.root)?.value;
   }
 
   get max() {
-    return this.maxNode(this.root);
+    return this.maxNode(this.root)?.value;
   }
 
   public insert(value: unknown) {
@@ -40,7 +40,7 @@ export class BinarySearchTree<T = any> {
   }
 
   public search(val: unknown) {
-    this.searchNode(this.root, val);
+    return this.searchNode(this.root, val);
   }
 
   public remove(val: unknown) {
@@ -88,9 +88,9 @@ export class BinarySearchTree<T = any> {
     // 边界情况
     if (isFalse(node) || isFalse(val)) { return false; }
 
-    if (this.compareFn(node, val) === Compare.MORETHAN) {
+    if (this.compareFn(node.value, val) === Compare.MORETHAN) {
       return this.searchNode(node.left, val);
-    } else if (this.compareFn(node, val) === Compare.LESSTHAN) {
+    } else if (this.compareFn(node.value, val) === Compare.LESSTHAN) {
       return this.searchNode(node.right, val);
     } else {
       return true;
@@ -110,7 +110,7 @@ export class BinarySearchTree<T = any> {
   private maxNode(node: Node | null) {
     let current = node;
     while(current && current.right) {
-      current = current.left;
+      current = current.right;
     }
 
     return current;
@@ -118,16 +118,16 @@ export class BinarySearchTree<T = any> {
 
   private insertNode(node:Node, value: unknown) {
     if (this.compareFn(node.value, value) === Compare.LESSTHAN) {
-      if (node.left === null) {
-        node.left = new Node(value);
-      } else {
-        this.insertNode(node.left, value);
-      }
-    } else {
       if (node.right === null) {
         node.right = new Node(value);
       } else {
         this.insertNode(node.right, value);
+      }
+    } else {
+      if (node.left === null) {
+        node.left = new Node(value);
+      } else {
+        this.insertNode(node.left, value);
       }
     }
   }
