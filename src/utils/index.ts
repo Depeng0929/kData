@@ -1,3 +1,5 @@
+import {Compare, Fasely} from "../types";
+
 export function defaultTOString(item: unknown) {
   if (item === null) {
     return 'NULL';
@@ -7,4 +9,15 @@ export function defaultTOString(item: unknown) {
     return `${item}`;
   }
   return JSON.stringify(item);
+}
+
+export function defaultCompareFn(a: any, b: any): Compare {
+  if (a === b) {
+    return Compare.EQUAL;
+  }
+  return a > b ? Compare.MORETHAN : Compare.LESSTHAN;
+}
+
+export function isFalse(val: unknown): val is Fasely {
+  return val === null || val === undefined;
 }
