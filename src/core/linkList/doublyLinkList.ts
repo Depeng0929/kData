@@ -35,7 +35,7 @@ export class DoublyLinkList<T = any> extends LinkList<T>{
   }
 
 
-  public removeAt(index: number) {
+  public removeAt(index: number): T | undefined {
     if (index > this.size || index < 0) {
       return;
     }
