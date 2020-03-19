@@ -6,7 +6,7 @@ import {Node} from "./node";
 export class BinarySearchTree<T = any> {
   public root: Node | null;
   constructor(
-    private compareFn: ICompareFN = defaultCompareFn
+    protected compareFn: ICompareFN = defaultCompareFn
   ) {
     this.root = null;
   }
@@ -51,7 +51,7 @@ export class BinarySearchTree<T = any> {
     this.root = Object.create(null);
   }
 
-  private removeNode(node: Node | null, val: unknown): Node | null {
+  protected removeNode(node: Node | null, val: unknown): Node | null {
     // 边界
     if (isFalse(node) || isFalse(val)) {
       return null;
@@ -116,7 +116,7 @@ export class BinarySearchTree<T = any> {
     return current;
   }
 
-  private insertNode(node:Node, value: unknown) {
+  protected insertNode(node:Node, value: unknown) {
     if (this.compareFn(node.value, value) === Compare.LESSTHAN) {
       if (node.right === null) {
         node.right = new Node(value);

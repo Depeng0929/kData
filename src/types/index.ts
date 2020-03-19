@@ -8,4 +8,12 @@ export enum Compare {
   MORETHAN,
 }
 
+export enum TreeDiff {
+  unBlanceRight = -2,
+  slightlyBlanceRight = -1,
+  blance,
+  slightlyBlanceLeft,
+  unBlanceLeft
+}
+
 export type Fasely = undefined | null;
