@@ -1,32 +1,56 @@
-const items = new WeakMap();
+import { deepClone } from "../../utils";
 
 export class Stack<T = unknown> {
-  constructor() {
-    items.set(this, []);
+  private items: T[] = [];
+
+  constructor(arr?: T[]) {
+    if (arr && Array.isArray(arr)) {
+      this.items = deepClone(arr);
+    } else {
+      this.items = [];
+    }
   }
 
+  /**
+   * 是否为空
+   */
+  get isEmpty() {
+    return this.items.length === 0;
+  }
+
+  /**
+   * 返回栈的长度
+   */
   get size() {
-    return items.get(this).length;
+    return this.items.length;
   }
 
+  /**
+   * 添加
+   * @param element
+   */
   public push(element: T) {
-    items.get(this).push(element);
+    this.items.push(element);
   }
 
-  public pop(): T | undefined {
-    return items.get(this).pop();
+  /**
+   * 移除栈顶元素
+   */
+  public pop() {
+    return this.items.pop();
   }
 
-  public peek(): T | undefined {
-    const arr = items.get(this);
-    return arr[arr.length - 1];
+  /**
+   * 返回栈顶
+   */
+  public peek() {
+    return this.items[this.items.length - 1];
   }
 
-  public isEmpty() {
-    return this.size === 0;
-  }
-
+  /**
+   * 清除栈
+   */
   public clear() {
-    items.set(this, []);
+    this.items = [];
   }
 }
