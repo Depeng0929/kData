@@ -1,12 +1,12 @@
-import { Stack } from './core/stack';
-import { Queue } from './core/queue';
-import { Deque } from './core/queue/deque';
-import { LinkList } from './core/linkList';
-import { DoublyLinkList } from './core/linkList/doublyLinkList';
-import { CircularLinkList } from './core/linkList/circularLinkList';
-import {KSet} from "./core/set";
-import {Dictionary} from "./core/dictionary";
-import { HashMap } from './core/dictionary/hashMap';
+import { Stack } from "./core/stack";
+import { Queue } from "./core/queue";
+import { Deque } from "./core/queue/Deque";
+import { LinkList } from "./core/linkList";
+import { DoublyLinkList } from "./core/linkList/doublyLinkList";
+import { CircularLinkList } from "./core/linkList/circularLinkList";
+import { KSet } from "./core/set";
+import { Dictionary } from "./core/dictionary";
+import { HashMap } from "./core/dictionary/hashMap";
 import { BinarySearchTree } from "./core/tree/binarySearchTree";
 
 export {
@@ -19,5 +19,5 @@ export {
   KSet,
   Dictionary,
   HashMap,
-  BinarySearchTree
+  BinarySearchTree,
 };
