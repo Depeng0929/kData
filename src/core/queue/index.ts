@@ -1,50 +1,47 @@
-interface IQueueElement<T = any> {
-  [index: number]: T;
-}
+export class Queue<T = any> {
+  protected items: T[] = [];
 
-export class Queue<T = unknown> {
-  protected items: IQueueElement<T>;
-  protected lowest: number;
-  protected count: number;
-  constructor() {
-    this.items = {};
-    this.count = 0;
-    this.lowest = 0;
+  constructor(arr: T[] = []) {
+    this.items = arr;
   }
 
+  /**
+   * 队列是否为空
+   */
+  get isEmpty() {
+    return this.items.length === 0;
+  }
+
+  /**
+   * 当前队列的长度
+   */
   get size() {
-    return this.count - this.lowest;
+    return this.items.length;
   }
 
+  /**
+   * 添加队列
+   * @param element
+   */
   public enqueue(element: T) {
-    this.items[this.count] = element;
-    this.count++;
+    this.items.push(element);
   }
 
-  public dequeue(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    const item = this.items[this.lowest];
-    delete this.items[this.lowest];
-    this.lowest++;
-    return item;
+  /**
+   * 出列：删除当前队列的第一个元素
+   */
+  public dequeue() {
+    return this.items.shift();
   }
 
-  public isEmpty() {
-    return this.lowest - this.count === 0;
-  }
-
-  public peek(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    return this.items[this.lowest];
+  /**
+   * 查看当前队列的第一个
+   */
+  public peek() {
+    return this.items[0];
   }
 
   public clear() {
-    this.items = {};
-    this.count = 0;
-    this.lowest = 0;
+    this.items = [];
   }
 }

@@ -1,54 +1,51 @@
-import { Queue } from './index';
+import { Queue } from "./index";
 
 export class Deque<T = any> extends Queue<T> {
-  constructor() {
-    super();
+  constructor(private capacity: number = 10, arr: T[] = []) {
+    super(arr);
   }
 
+  /**
+   * 在双端队列前端添加元素
+   * @param element
+   */
   public addFront(element: T) {
-    if (this.isEmpty()) {
-      this.addBack(element);
-      return;
-    }
-
-    if (this.lowest === 0) {
-      for (let i = this.count; i > 0; i--) {
-        this.items[i] = this.items[i - 1];
-      }
-      this.count++;
-      this.lowest = 0;
-      this.items[0] = element;
-      return;
-    }
-
-    this.lowest--;
-    this.items[this.lowest] = element;
+    this.items.unshift(element);
   }
 
+  /**
+   * 在双端队列后端添加元素
+   * @param element
+   */
   public addBack(element: T) {
-    this.items[this.count] = element;
-    this.count++;
+    this.enqueue(element);
   }
 
-  public removeBack(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    this.count--;
-    const item = this.items[this.count];
-    delete this.items[this.count];
-    return item;
+  /**
+   * 移除双端队列的前端第一个
+   */
+  public removeFront() {
+    return this.dequeue();
   }
 
-  public removeFront(): T | undefined {
-    return super.dequeue();
+  /**
+   * 移除双端队列的后端第一个
+   */
+  public removeBack() {
+    return this.items.pop();
   }
 
-  public peekFront(): T | undefined {
-    return this.items[this.lowest];
+  /**
+   * 查看双端队列的第一个
+   */
+  public peekFront() {
+    return this.peek();
   }
 
-  public peekBack(): T | undefined {
-    return this.items[this.count - 1];
+  /**
+   * 查看双端队列的最后一个
+   */
+  public peekBack() {
+    return this.items[this.items.length - 1];
   }
 }
