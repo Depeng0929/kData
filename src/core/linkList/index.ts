@@ -1,111 +1,144 @@
-import { Node } from './node';
+import { defaultEqual, isFalse } from "../../utils/index";
+import { Fasely } from "../../types/index";
+import { Node } from "./node";
 
-function equal(a: any, b: any) {
-  return a === b;
-}
-
-export class LinkList<T = any> {
-  protected head: Node<T> | undefined;
-  protected count: number;
+export class LinkList<T = unknown> {
+  public head: Node<T> | Fasely = undefined;
+  protected count: number = 0;
+  constructor(public equal: (a: any, b: any) => boolean = defaultEqual) {}
   get size() {
     return this.count;
   }
-
-  constructor() {
-    this.head = undefined;
-    this.count = 0;
+  get isEmpty() {
+    return this.count === 0;
   }
 
+  /**
+   * 返回链表中第一个元素
+   */
+  public shift() {
+    return this.head;
+  }
+
+  /**
+   * 向链表添加一个新元素
+   * @param element
+   */
   public push(element: T) {
-    this.insert(element, this.size);
-  }
-
-  public removeAt(index: number) {
-    if (index > this.count || index < 0) {
-      return;
-    }
-
-    let current = this.head;
-    if (index === 0) {
-      this.head = current!.next;
+    const node = new Node(element);
+    if (isFalse(this.head)) {
+      this.head = node;
     } else {
-      const prev = this.getElementAt(index - 1);
-      current = prev!.next;
-      prev!.next = current!.next;
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
     }
-    this.count--;
-
-    return current!.value;
+    this.count++;
   }
 
-  public getElementAt(index: number) {
-    if (index > this.count || index < 0) {
-      return;
-    }
-
-    let node = this.head;
-    for (let i = 0; i < index; i++) {
-      node = node!.next;
-    }
-
-    return node;
-  }
-
+  /**
+   * 向链表特定的位置插入一个新元素
+   * @param element
+   * @param index
+   */
   public insert(element: T, index: number) {
     if (index > this.count || index < 0) {
       return;
     }
 
-    const node = new Node<T>(element);
-    let current;
+    const node = new Node(element);
     if (index === 0) {
-      current = this.head;
-      node.next = current;
+      const current = this.head;
       this.head = node;
+      node.next = current;
     } else {
-      const prev = this.getElementAt(index - 1);
-      current = prev!.next;
-      prev!.next = node;
+      const prev = this.getElementAt(index - 1)!;
+      const current = prev.next;
+      prev.next = node;
       node.next = current;
     }
-
     this.count++;
+    return true;
   }
 
-  public indexOf(element: T) {
+  /**
+   * 返回链表中特定位置的元素。如果不存在，返回undefined
+   * @param index
+   */
+  public getElementAt(index: number) {
+    if (this.isEmpty) {
+      return;
+    }
+    if (index > this.count || index < 0) {
+      return;
+    }
+
     let current = this.head;
-    for (let i = 0; i < this.count && current; i++) {
-      if (this._isEqual(element, current.value)) {
+    for (let i = 0; i < index; i++) {
+      current = current!.next;
+    }
+
+    return current;
+  }
+
+  /**
+   * 返回元素在链表中的索引
+   * @param element
+   */
+  public indexOf(element: T) {
+    if (this.isEmpty) {
+      return -1;
+    }
+
+    let current = this.head;
+    for (let i = 0; i < this.count; i++) {
+      if (this.equal(current!.element, element)) {
         return i;
       }
       current = current!.next;
     }
+
     return -1;
   }
 
+  /**
+   * 从链表的特定位置移除一个元素， 如果不存在，返回undefined
+   * @param index
+   */
+  public removeAt(index: number) {
+    if (index > this.count || index < 0) {
+      return;
+    }
+    let current;
+    if (index === 0) {
+      current = this.head;
+      this.head = current!.next;
+    } else {
+      const prev = this.getElementAt(index - 1)!;
+      current = prev.next;
+      prev.next = current!.next;
+    }
+
+    this.count--;
+    return current!.element;
+  }
+
+  /**
+   * 从链表中移除一个元素
+   * @param element
+   */
   public remove(element: T) {
     const index = this.indexOf(element);
     return this.removeAt(index);
   }
 
-  public isEmpty() {
-    return this.count === 0;
-  }
-
-  public getHead() {
-    return this.head;
-  }
-
+  /**
+   * 清除链表中所有元素
+   */
   public clear() {
+    this.head = null;
     this.count = 0;
-    this.head = undefined;
-  }
-
-  private _isEqual(a: T, b: T) {
-    if (typeof a === 'object') {
-      return Object.is(a, b);
-    } else {
-      return a === b;
-    }
   }
 }

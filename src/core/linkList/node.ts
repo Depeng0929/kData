@@ -1,8 +1,8 @@
-export class Node<T = any> {
-  public value: T;
-  public next: Node | undefined;
-  constructor(value: T) {
-    this.value = value;
+export class Node<T = unknown> {
+  public element: T;
+  public next: Node<T> | undefined | null;
+  constructor(element: T) {
+    this.element = element;
     this.next = undefined;
   }
 }

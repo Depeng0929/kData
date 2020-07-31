@@ -1,11 +1,10 @@
-import {LinkList} from "./index";
-import {Node} from "./node";
+import { LinkList } from "./index";
+import { Node } from "./node";
 
-export class CircularLinkList<T = any> extends LinkList<T>{
+export class CircularLinkList<T = any> extends LinkList<T> {
   constructor() {
     super();
   }
-
 
   public insert(element: T, index: number) {
     if (index > this.count || index < 0) {
@@ -24,7 +23,6 @@ export class CircularLinkList<T = any> extends LinkList<T>{
         this.head = node;
         node.next = this.head;
       }
-
     } else {
       const prev = this.getElementAt(index - 1);
       current = prev!.next;
@@ -33,8 +31,8 @@ export class CircularLinkList<T = any> extends LinkList<T>{
     }
 
     this.count++;
+    return true;
   }
-
 
   public removeAt(index: number): undefined | any {
     if (index > this.count || index < 0) {
@@ -59,6 +57,6 @@ export class CircularLinkList<T = any> extends LinkList<T>{
     }
     this.count--;
 
-    return current!.value;
+    return current!.element;
   }
 }

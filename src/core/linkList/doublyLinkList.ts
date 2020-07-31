@@ -1,7 +1,7 @@
-import {LinkList} from "./index";
-import {DoublyNode} from "./node";
+import { LinkList } from "./index";
+import { DoublyNode } from "./node";
 
-export class DoublyLinkList<T = any> extends LinkList<T>{
+export class DoublyLinkList<T = any> extends LinkList<T> {
   public tail: DoublyNode | undefined;
   public head: DoublyNode | undefined;
   constructor() {
@@ -9,7 +9,7 @@ export class DoublyLinkList<T = any> extends LinkList<T>{
     this.tail = undefined;
   }
 
-  public insert (element: any, index: number) {
+  public insert(element: T, index: number) {
     if (index > this.size || index < 0) {
       return;
     }
@@ -31,16 +31,17 @@ export class DoublyLinkList<T = any> extends LinkList<T>{
       prev!.next = node;
       current!.prev = node;
     }
-    this.count ++;
-  }
+    this.count++;
 
+    return true;
+  }
 
   public removeAt(index: number): T | undefined {
     if (index > this.size || index < 0) {
       return;
     }
     let current = this.head;
-    if(index === 0) {
+    if (index === 0) {
       this.head = current!.next;
       if (this.size === 1) {
         this.tail = undefined;
@@ -57,6 +58,6 @@ export class DoublyLinkList<T = any> extends LinkList<T>{
       prev!.next = current.next;
       current.next!.prev = prev;
     }
-    this.count --;
+    this.count--;
   }
 }

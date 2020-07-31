@@ -1,11 +1,11 @@
-import {Compare, Fasely} from "../types";
+import { Compare, Fasely } from "../types";
 
 export function defaultTOString(item: unknown) {
   if (item === null) {
-    return 'NULL';
-  } else if(item === undefined) {
-    return 'UNDEFINED';
-  } else if (typeof item === 'string' || item instanceof String) {
+    return "NULL";
+  } else if (item === undefined) {
+    return "UNDEFINED";
+  } else if (typeof item === "string" || item instanceof String) {
     return `${item}`;
   }
   return JSON.stringify(item);
@@ -34,6 +34,6 @@ export function deepClone(val: any) {
   return result;
 }
 
-export function equal(a: unknown, b: unknown) {
+export function defaultEqual(a: unknown, b: unknown) {
   return a === b;
 }

@@ -1,6 +1,6 @@
-import {LinkList} from "../linkList";
-import {VlauePair} from "./vlauePair";
-import {defaultTOString, isFalse} from "../../utils";
+import { LinkList } from "../linkList";
+import { VlauePair } from "./vlauePair";
+import { defaultTOString, isFalse } from "../../utils";
 
 interface IHashMapTable {
   [index: string]: LinkList<VlauePair>;
@@ -8,14 +8,12 @@ interface IHashMapTable {
 
 export class HashMap {
   public table: IHashMapTable;
-  constructor(
-    public toStrFn: (item: unknown) => string = defaultTOString
-  ) {
+  constructor(public toStrFn: (item: unknown) => string = defaultTOString) {
     this.table = Object.create(null);
   }
 
   public set(key: unknown, value: any) {
-    if(isFalse(key) || isFalse(value)) {
+    if (isFalse(key) || isFalse(value)) {
       return;
     }
     const strKey = this.toStrFn(key);
@@ -30,10 +28,10 @@ export class HashMap {
     const strKey = this.toStrFn(key);
     const linklist = this.table[strKey];
     if (!isFalse(linklist)) {
-      let current = linklist.getHead();
-      while(current) {
-        if (current.value.key === key) {
-          return current.value.value;
+      let current = linklist.shift();
+      while (current) {
+        if (current.element.key === key) {
+          return current.element.value;
         }
         current = current.next;
       }
@@ -44,11 +42,11 @@ export class HashMap {
     const strKey = this.toStrFn(key);
     const linklist = this.table[strKey];
     if (!isFalse(linklist)) {
-      let current = linklist.getHead();
+      let current = linklist.shift();
       while (current) {
-        if (current.value.key === key) {
-          linklist.remove(current.value);
-          if (linklist.isEmpty()){
+        if (current.element.key === key) {
+          linklist.remove(current.element);
+          if (linklist.isEmpty) {
             delete this.table[strKey];
           }
         }
@@ -60,5 +58,4 @@ export class HashMap {
   public clear() {
     this.table = Object.create(null);
   }
-
 }
