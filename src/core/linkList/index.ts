@@ -1,11 +1,11 @@
-import { defaultEqual, isFalse } from "../../utils/index";
-import { Fasely } from "../../types/index";
+import { defaultCompareFn, isFalse } from "../../utils/index";
+import { Compare, Fasely } from "../../types/index";
 import { Node } from "./node";
 
 export class LinkList<T = unknown> {
   public head: Node<T> | Fasely = undefined;
   protected count: number = 0;
-  constructor(public equal: (a: any, b: any) => boolean = defaultEqual) {}
+  constructor(public compare: (a: any, b: any) => Compare = defaultCompareFn) {}
   get size() {
     return this.count;
   }
@@ -45,7 +45,7 @@ export class LinkList<T = unknown> {
    */
   public insert(element: T, index: number) {
     if (index > this.count || index < 0) {
-      return;
+      return false;
     }
 
     const node = new Node(element);
@@ -94,7 +94,7 @@ export class LinkList<T = unknown> {
 
     let current = this.head;
     for (let i = 0; i < this.count; i++) {
-      if (this.equal(current!.element, element)) {
+      if (this.compare(current!.element, element) === Compare.EQUAL) {
         return i;
       }
       current = current!.next;
@@ -140,5 +140,44 @@ export class LinkList<T = unknown> {
   public clear() {
     this.head = null;
     this.count = 0;
+  }
+
+  /**
+   * 对链表各个元素进行排序
+   */
+  public sort() {
+    if (this.isEmpty || isFalse(this.head)) {
+      return false;
+    }
+
+    this.recursiveSort(this.head);
+  }
+  private sortByOnce(begin: Node<T>, end?: Node<T>) {
+    const base = begin.element;
+    let pPointer = begin;
+    let nPointer = begin.next;
+    while (this.compare(nPointer, end) !== Compare.EQUAL && !isFalse(nPointer)) {
+      if (this.compare(nPointer!.element, base) === Compare.LESSTHAN) {
+        swap(pPointer.next!, nPointer!);
+        pPointer = pPointer.next!;
+      }
+      nPointer = nPointer!.next;
+    }
+    swap(pPointer, begin);
+    return pPointer;
+
+    function swap(a: Node<T>, b: Node<T>) {
+      const val = a.element;
+      a.element = b.element;
+      b.element = val;
+    }
+  }
+  private recursiveSort(begin: Node<T>, end?: Node<T>) {
+    if (this.compare(begin, end) === Compare.EQUAL || isFalse(begin)) {
+      return false;
+    }
+    const base = this.sortByOnce(begin, end);
+    this.recursiveSort(begin, base);
+    this.recursiveSort(base.next!, end);
   }
 }

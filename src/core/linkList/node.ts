@@ -6,13 +6,3 @@ export class Node<T = unknown> {
     this.next = undefined;
   }
 }
-
-export class DoublyNode<T = any> extends Node<T> {
-  public prev: DoublyNode | undefined;
-  public next: DoublyNode | undefined;
-  constructor(element: T) {
-    super(element);
-    this.prev = undefined;
-    this.next = undefined;
-  }
-}

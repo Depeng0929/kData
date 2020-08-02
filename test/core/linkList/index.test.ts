@@ -63,4 +63,26 @@ describe("linkList is ok?", function () {
     expect(removeItem).toBe(1);
     expect(linkList.shift()!.element).toBe(2);
   });
+
+  it("should sort normal", function () {
+    linkList.clear();
+    linkList.push(5);
+    linkList.push(1);
+    linkList.push(2);
+    linkList.push(3);
+    linkList.push(4);
+    linkList.push(6);
+    linkList.push(9);
+    linkList.push(7);
+    linkList.push(10);
+    linkList.push(8);
+    linkList.sort();
+    const arr = [];
+    let current = linkList.shift();
+    while (current) {
+      arr.push(current.element);
+      current = current.next;
+    }
+    expect(arr).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  });
 });
