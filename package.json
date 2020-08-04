@@ -1,7 +1,7 @@
 {
   "name": "kdata",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "常用的数据结构TS版",
   "keywords": [],
   "main": "dist/kdata.umd.js",
   "module": "dist/kdata.es5.js",
@@ -12,7 +12,7 @@
   "author": "depeng.kong <15365182986@163.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Depeng0929/kData"
   },
   "license": "MIT",
   "engines": {
