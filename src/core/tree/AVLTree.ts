@@ -1,13 +1,11 @@
-import {BinarySearchTree} from "../../kdata";
-import { Compare, ICompareFN, TreeDiff} from "../../types";
-import {defaultCompareFn, isFalse} from "../../utils";
-import {Node} from "./node";
+import { BinarySearchTree } from "../../kdata";
+import { Compare, ICompareFN, TreeDiff } from "../../types";
+import { defaultCompareFn, isFalse } from "../../utils";
+import { Node } from "./node";
 
 export class AVLTree<T = any> extends BinarySearchTree<T> {
   public root: Node | null;
-  constructor(
-    public compareFn: ICompareFN = defaultCompareFn
-  ) {
+  constructor(public compareFn: ICompareFN = defaultCompareFn) {
     super(compareFn);
     this.root = null;
   }
@@ -17,7 +15,7 @@ export class AVLTree<T = any> extends BinarySearchTree<T> {
   }
 
   protected insertNode(node: Node | null, value: unknown): Node {
-    if (node === null){
+    if (node === null) {
       return new Node(value);
     } else if (this.compareFn(node.value, value) === Compare.MORETHAN) {
       node.left = this.insertNode(node.left, value);
@@ -28,16 +26,16 @@ export class AVLTree<T = any> extends BinarySearchTree<T> {
     }
 
     const balanceFator = this.getBlanceFactor(node);
-    if(balanceFator === TreeDiff.unBlanceRight) {
-      if (this.compareFn(node.right!.value, value) === Compare.LESSTHAN){
+    if (balanceFator === TreeDiff.unBlanceRight) {
+      if (this.compareFn(node.right!.value, value) === Compare.LESSTHAN) {
         node = this.rotationRR(node);
       } else {
         return this.rotationRL(node);
       }
     }
 
-    if (balanceFator ===  TreeDiff.unBlanceLeft) {
-      if (this.compareFn(node.left!.value, value) === Compare.LESSTHAN){
+    if (balanceFator === TreeDiff.unBlanceLeft) {
+      if (this.compareFn(node.left!.value, value) === Compare.LESSTHAN) {
         node = this.rotationLL(node);
       } else {
         return this.rotationLR(node);
@@ -49,14 +47,11 @@ export class AVLTree<T = any> extends BinarySearchTree<T> {
 
   // TODO: removeNode
 
-  private getNodeHeight(node: Node | null):number {
+  private getNodeHeight(node: Node | null): number {
     if (isFalse(node)) {
       return -1;
     }
-    return Math.max(
-      this.getNodeHeight(node.right),
-      this.getNodeHeight(node.left)
-    ) + 1;
+    return Math.max(this.getNodeHeight(node.right), this.getNodeHeight(node.left)) + 1;
   }
 
   private getBlanceFactor(node: Node): TreeDiff {
@@ -66,7 +61,7 @@ export class AVLTree<T = any> extends BinarySearchTree<T> {
 
   private rotationLL(node: Node): Node {
     const tmp = node.left;
-    node.left  = tmp!.right;
+    node.left = tmp!.right;
     tmp!.right = node;
     return tmp!;
   }
@@ -76,7 +71,7 @@ export class AVLTree<T = any> extends BinarySearchTree<T> {
     tmp!.left = node;
     return tmp!;
   }
-  private rotationLR(node: Node): Node{
+  private rotationLR(node: Node): Node {
     node.left = this.rotationRR(node.left!);
     return this.rotationLL(node);
   }
