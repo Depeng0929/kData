@@ -16,6 +16,12 @@ describe("linkList is ok?", function () {
     expect(linkList.size).toBe(3);
     expect(linkList.isEmpty).toBeFalsy();
   });
+  it("should init ok when import prams", function () {
+    const linkList2 = new LinkList([1, 2, 3]);
+    expect(linkList2.size).toBe(3);
+    expect(linkList2.isEmpty).toBeFalsy();
+    expect(linkList2.shift()!.element).toBe(1);
+  });
 
   it("should clear ok", function () {
     linkList.clear();

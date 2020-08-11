@@ -5,7 +5,14 @@ import { Node } from "./node";
 export class LinkList<T = unknown> {
   public head: Node<T> | Fasely = undefined;
   protected count: number = 0;
-  constructor(public compare: (a: any, b: any) => Compare = defaultCompareFn) {}
+  constructor(
+    private items: T[] = [],
+    public compare: (a: any, b: any) => Compare = defaultCompareFn
+  ) {
+    this.items.forEach((item) => {
+      this.push(item);
+    });
+  }
   get size() {
     return this.count;
   }
@@ -152,6 +159,7 @@ export class LinkList<T = unknown> {
 
     this.recursiveSort(this.head);
   }
+
   private sortByOnce(begin: Node<T>, end?: Node<T>) {
     const base = begin.element;
     let pPointer = begin;
