@@ -1,71 +1,71 @@
-import {defaultTOString, isFalse} from "../../utils";
-import {VlauePair} from "./vlauePair";
+import { defaultTOString, isFalse } from "../../utils";
+import { ValuePair } from "./valuePair";
 
-interface IDictionary {
-  [key: string]: VlauePair;
+interface IDictionaryValues<T = unknown> {
+  [str: string]: ValuePair<T>;
 }
 
-export class Dictionary<T = any> {
-  public tables: IDictionary;
-  constructor(
-    public toStrFn: (item: unknown) => string = defaultTOString
-  ) {
-    this.tables = Object.create(null);
-  }
+export class Dictionary<T = unknown> {
+  private items: IDictionaryValues<T> = {};
+  constructor(private toStrFn: (item: unknown) => string = defaultTOString) {}
 
-
-  private get keyValues() {
-    return Object.values(this.tables);
-  }
-  get keys() {
-    return this.keyValues.map(valuePair => valuePair.key);
-  }
-  get values() {
-    return this.keyValues.map(valuePair => valuePair.value);
-  }
   get size() {
-    return Object.keys(this.tables).length;
+    return Object.keys(this.items).length;
   }
 
-
-  public set(key: unknown, value: T) {
-    if (!isFalse(key) && !isFalse(value)) {
-      const tableKey = this.toStrFn(key);
-      this.tables[tableKey] = new VlauePair(key, value);
-    }
-  }
-
-  public get(key: unknown) {
-    const valuePair = this.tables[this.toStrFn(key)];
-    return isFalse(valuePair) ? undefined : valuePair.value;
+  get isEmpty() {
+    return this.size === 0;
   }
 
   public hasKey(key: unknown) {
-    return !isFalse(this.tables[this.toStrFn(key)]);
+    return !isFalse(this.items[this.toStrFn(key)]);
+  }
+
+  public set(key: unknown, value: T) {
+    if (!isFalse(key) && !isFalse(value)) {
+      const itemKey = this.toStrFn(key);
+      this.items[itemKey] = new ValuePair<T>(key, value);
+      return true;
+    }
+    return false;
+  }
+
+  public get(key: unknown): T | undefined {
+    const valuePair = this.items[this.toStrFn(key)];
+    return isFalse(valuePair) ? undefined : valuePair.value;
   }
 
   public remove(key: unknown) {
     if (this.hasKey(key)) {
-      delete this.tables[this.toStrFn(key)];
+      delete this.items[this.toStrFn(key)];
+      return true;
     }
+    return false;
   }
 
-  public forEach(callback: (key: unknown, value: unknown) => any) {
-    for (let i = 0; i < this.keyValues.length; i++) {
-      const result = callback(this.keyValues[i].key, this.keyValues[i].value);
-      if (result === false){
+  public keys() {
+    return this.keyValues().map((valuePair) => valuePair.key);
+  }
+
+  public values() {
+    return this.keyValues().map((valuePair) => valuePair.value);
+  }
+
+  public forEach(callback: (key: unknown, value: unknown) => unknown) {
+    const valuePair = this.keyValues();
+    for (let i = 0; i < valuePair.length; i++) {
+      const result = callback(valuePair[i].key, valuePair[i].value);
+      if (result === false) {
         break;
       }
     }
   }
 
-  public isEmpty() {
-    return this.size === 0;
-  }
-
   public clear() {
-    this.tables = Object.create(null);
+    this.items = {};
   }
 
-
+  private keyValues(): ValuePair[] {
+    return Object.values(this.items);
+  }
 }

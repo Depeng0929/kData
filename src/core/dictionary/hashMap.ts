@@ -1,9 +1,9 @@
 import { LinkList } from "../linkList";
-import { VlauePair } from "./vlauePair";
+import { ValuePair } from "./valuePair";
 import { defaultTOString, isFalse } from "../../utils";
 
 interface IHashMapTable {
-  [index: string]: LinkList<VlauePair>;
+  [index: string]: LinkList<ValuePair>;
 }
 
 export class HashMap {
@@ -17,9 +17,9 @@ export class HashMap {
       return;
     }
     const strKey = this.toStrFn(key);
-    const valuePair = new VlauePair(key, value);
+    const valuePair = new ValuePair(key, value);
     if (isFalse(this.table[strKey])) {
-      this.table[strKey] = new LinkList<VlauePair>();
+      this.table[strKey] = new LinkList<ValuePair>();
     }
     this.table[strKey].push(valuePair);
   }
