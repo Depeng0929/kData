@@ -24,6 +24,7 @@ export class Dictionary<T = unknown> {
   public set(key: unknown, value: T) {
     if (!isFalse(key) && !isFalse(value)) {
       const itemKey = this.toStrFn(key);
+      // XXX: why do this?
       this.items[itemKey] = new ValuePair<T>(key, value);
       return true;
     }
